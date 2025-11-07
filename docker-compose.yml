@@ -1,0 +1,34 @@
+
+services:
+  mongo:
+    image: mongo:7
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  backend:
+    build: ./note_backend
+    container_name: backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb+srv://kavindusanga1331_db_user:8RoH4AbbAxbkV6v0@cluster0.3ky8ltd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      - PORT=5000
+      - JWT_SECRET=kavinusasngai5512524+-12544asdasgfbbJSHFHAHhfh
+    depends_on:
+      - mongo
+
+  frontend:
+    build: ./nte_ap
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:5000/api/auth
+    depends_on:
+      - backend
+
+volumes:
+  mongo-data:
