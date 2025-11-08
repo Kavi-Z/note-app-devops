@@ -91,3 +91,12 @@
   width: 100%;
   margin-top: 20px;
 }
+.loading, .error {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+}
+
+.error {
+  color: #e63946;
+}

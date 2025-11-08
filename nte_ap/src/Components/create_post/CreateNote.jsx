@@ -8,7 +8,7 @@ const CreateNote = () => {
   const [author, setAuthor] = useState("");
   const navigate = useNavigate();
 
-  const handleSaveNote = (e) => {
+  const handleSaveNote = async (e) => {
     e.preventDefault();
 
     if (!title || !content || !author) {
@@ -16,7 +16,6 @@ const CreateNote = () => {
       return;
     }
 
-    // In a real app, you'd send this to your backend
     const newNote = {
       title,
       content,
@@ -24,10 +23,26 @@ const CreateNote = () => {
       date: new Date(),
     };
 
-    console.log("New Note Created:", newNote);
+    try {
+      const res = await fetch("http://localhost:5000/api/notes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newNote),
+      });
 
-    // Redirect to notes page (could also pass the note data via state or API)
-    navigate("/notes");
+      if (res.ok) {
+        console.log("Note saved successfully!");
+        navigate("/notes");
+      } else {
+        console.error("Failed to save note:", await res.text());
+        alert("Error saving note. Please try again.");
+      }
+    } catch (err) {
+      console.error("Error:", err);
+      alert("Unable to connect to the backend.");
+    }
   };
 
   return (
