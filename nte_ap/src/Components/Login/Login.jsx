@@ -6,7 +6,7 @@ import "./Login.css";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate(); // ✅ for navigation
+  const navigate = useNavigate();  
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -21,8 +21,7 @@ const Login = () => {
       console.log("Token:", res.data.token);
 
       localStorage.setItem("token", res.data.token);
-
-      // ✅ Redirect to notes page after successful login
+ 
       navigate("/notes");
 
     } catch (err) {

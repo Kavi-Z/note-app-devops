@@ -8,7 +8,7 @@ const Landing = () => {
   return (
     <div className="landing-container">
       <div className="landing-content">
-        <h1 className="landing-title">Note App</h1>
+        <h1 className="landing-title">My Note App</h1>
         <p className="landing-subtitle">Organize your notes efficiently and beautifully</p>
         <div className="landing-buttons">
           <button className="btn login-btn" onClick={() => navigate('/login')}>
