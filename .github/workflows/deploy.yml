@@ -1,0 +1,42 @@
+name: Deploy Note App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USER }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Build backend image
+      run: docker build -t ${{ secrets.DOCKERHUB_USER }}/noteapp-backend:latest ./note_backend
+
+    - name: Build frontend image
+      run: docker build -t ${{ secrets.DOCKERHUB_USER }}/noteapp-frontend:latest ./nte_ap
+
+    - name: Push images to Docker Hub
+      run: |
+        docker push ${{ secrets.DOCKERHUB_USER }}/noteapp-backend:latest
+        docker push ${{ secrets.DOCKERHUB_USER }}/noteapp-frontend:latest
+
+    - name: Deploy on EC2
+      uses: appleboy/ssh-action@v0.1.7
+      with:
+        host: ${{ secrets.EC2_IP }}
+        username: ubuntu
+        key: ${{ secrets.EC2_PEM }}
+        script: |
+          cd ~/note-app-devops
+          docker-compose pull
+          docker-compose up -d
