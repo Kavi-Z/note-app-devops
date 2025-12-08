@@ -13,7 +13,7 @@ This project demonstrates cloud deployment, container orchestration, and full-st
 - **Frontend:** React  
 - **Backend:** Node.js + Express  
 - **Database:** MongoDB (Docker container)  
-- **Deployment:** Docker, Docker Hub, Docker Compose, AWS EC2  
+- **Deployment:** Docker, Docker Hub, Terraform, Ansible and AWS EC2  
 
 ---
 
@@ -21,6 +21,6 @@ This project demonstrates cloud deployment, container orchestration, and full-st
 
 Run the application on your EC2 instance:
 
-```bash
-docker-compose pull
-docker-compose up -d
+Application Runs in - 
+http://15.207.221.16:3000
+
