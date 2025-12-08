@@ -18,8 +18,9 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/notes" element={<NotesPage />} />
          <Route path="/create-note" element={<CreateNote />} />
-         <ToastContainer position="top-right" autoClose={2000} />
+         
       </Routes>
+      <ToastContainer position="top-right" autoClose={2000} />
     </Router>
   );
 }
