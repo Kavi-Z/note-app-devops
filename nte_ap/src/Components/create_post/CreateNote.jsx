@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CreateNote.css";
+import { toast } from 'react-toastify'
 
 const CreateNote = () => {
   const [title, setTitle] = useState("");
@@ -14,7 +15,7 @@ const CreateNote = () => {
     e.preventDefault();
 
     if (!title || !content || !author) {
-      alert("Please fill in all fields.");
+      toast.error("Please fill in all fields.");
       return;
     }
 
@@ -41,11 +42,11 @@ const res = await fetch(`${API_URL}/notes`, {
         navigate("/notes");
       } else {
         console.error("Failed to save note:", await res.text());
-        alert("Error saving note. Please try again.");
+        toast.error("Error saving note. Please try again.");
       }
     } catch (err) {
       console.error("Error:", err);
-      alert("Unable to connect to the backend.");
+      toast.error("Unable to connect to the backend.");
     }
   };
 

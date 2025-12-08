@@ -5,6 +5,8 @@ import Login from "./Components/Login/Login.jsx";
 import Signup from "./Components/Signup/Signup.jsx";
 import NotesPage from "./Components/posts_page/NotesPage.jsx";
 import CreateNote from "./Components/create_post/CreateNote.jsx";
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
  
 
 function App() {
@@ -16,6 +18,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/notes" element={<NotesPage />} />
          <Route path="/create-note" element={<CreateNote />} />
+         <ToastContainer position="top-right" autoClose={2000} />
       </Routes>
     </Router>
   );

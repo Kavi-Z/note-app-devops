@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { toast } from 'react-toastify'
 import "./Signup.css";
 
 const Signup = () => {
@@ -14,12 +15,12 @@ const Signup = () => {
 
     try {
       const res = await axios.post(`${API_URL}/auth/signup`, { name, email, password });
-      alert("Signup Successful! You can now login.");
+      toast.success("Signup Successful! You can now login.");
       console.log(res.data);
       window.location.href = "/login";
 
     } catch (err) {
-      alert(err.response?.data?.message || "Signup failed");
+      toast.error(err.response?.data?.message || "Signup failed");
     }
   };
 
