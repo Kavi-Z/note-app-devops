@@ -38,5 +38,7 @@ jobs:
         key: ${{ secrets.EC2_PEM }}
         script: |
           cd ~/note-app-devops
+          docker-compose down
+          docker system prune -a --volumes -f
           docker-compose pull
           docker-compose up -d
